@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BMC Outsourcing Pvt Ltd</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#122824; --ink-2:#1B3A34; --gold:#C9A253; --gold-soft:#E4C77E; --clay:#8B5E3C;
+    --paper:#FAF8F3; --paper-2:#F0ECE1; --text:#20241F; --line: rgba(18,40,36,0.14); --radius:4px;
+  }
+  :root[data-theme="dark"]{ --paper:#14171A; --paper-2:#1B1F1F; --text:#EDEAE1; --line: rgba(228,199,126,0.2); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --paper:#14171A; --paper-2:#1B1F1F; --text:#EDEAE1; --line: rgba(228,199,126,0.2); } }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:76px;}
+  body{margin:0; background:var(--paper); color:var(--text); font-family:'Inter',sans-serif; line-height:1.65;
+    padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);}
+  h1,h2,h3{font-family:'Fraunces',serif; font-weight:500; line-height:1.1; margin:0;}
+  a{color:inherit;} img{max-width:100%;}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 28px;}
+  ::selection{background:var(--gold-soft); color:var(--ink);}
+
+  header{position:sticky; top:0; z-index:60; background:color-mix(in srgb, var(--paper) 90%, transparent);
+    backdrop-filter:blur(8px); border-bottom:1px solid var(--line); padding-top:env(safe-area-inset-top,0px);}
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; height:74px;}
+  .brand{font-family:'Fraunces',serif; font-size:1.2rem; font-weight:600; letter-spacing:.01em;}
+  .brand em{font-style:normal; color:var(--gold); border-bottom:1.5px solid var(--gold-soft);}
+  .navlinks{display:flex; gap:2rem; list-style:none; margin:0; padding:0;}
+  .navlinks a{position:relative; font-size:.9rem; text-decoration:none; padding-bottom:4px; white-space:nowrap;}
+  .navlinks a::after{content:"";position:absolute; left:0; bottom:0; width:0; height:1.5px; background:var(--gold); transition:width .25s ease;}
+  .navlinks a:hover::after, .navlinks a:focus-visible::after{width:100%;}
+  .navtoggle{display:none; background:none; border:1px solid var(--line); border-radius:var(--radius); padding:8px 11px; font-size:1.1rem; color:var(--text);}
+  @media (max-width:900px){
+    .navlinks{position:absolute; top:74px; left:0; right:0; flex-direction:column; gap:0; background:var(--paper);
+      border-bottom:1px solid var(--line); max-height:0; overflow:hidden; transition:max-height .25s ease;}
+    .navlinks.open{max-height:480px;}
+    .navlinks a{display:block; padding:15px 28px; border-bottom:1px solid var(--line);}
+    .navlinks a::after{display:none;}
+    .navtoggle{display:block;}
+  }
+
+  section{padding:100px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .eyebrow{font-size:.84rem; color:var(--clay); margin:0 0 12px; font-weight:500;}
+
+  /* HERO SLIDER */
+  .hero{position:relative; overflow:hidden; border-top:none; color:#F3EFE4;}
+  .slide{position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .7s ease; display:flex; align-items:center;}
+  .slide.active{position:relative; opacity:1; visibility:visible;}
+  .slide::before{content:""; position:absolute; inset:0; z-index:0;
+    background-image:repeating-linear-gradient(115deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 48px);}
+  .slide-1{background:radial-gradient(1100px 620px at 78% -10%, #1E453D 0%, #122824 55%, #0D1D1A 100%);}
+  .slide-2{background:radial-gradient(1100px 620px at 20% 110%, #3A2E1E 0%, #241C12 55%, #150F0A 100%);}
+  .slide-3{background:radial-gradient(1100px 620px at 80% 110%, #234A2E 0%, #142B1B 55%, #0C1A10 100%);}
+  .slide-4{background:radial-gradient(1100px 620px at 20% -10%, #2B3B45 0%, #17232A 55%, #0D1519 100%);}
+  .slide-grid{position:relative; z-index:1; display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center; padding:96px 0 60px; width:100%;}
+  .hero h1{font-size:clamp(2.2rem,4.2vw,3.4rem); color:#FBF8EF;}
+  .hero h1 .accent{color:var(--gold-soft);}
+  .hero p.lead{max-width:46ch; font-size:1.08rem; margin-top:18px; color:#D9D3C3;}
+  .cta-row{display:flex; gap:14px; margin-top:30px; flex-wrap:wrap;}
+  .btn{display:inline-block; padding:13px 26px; border-radius:var(--radius); font-size:.95rem; text-decoration:none; font-weight:500; border:1px solid var(--gold-soft); cursor:pointer;}
+  .btn-solid{background:var(--gold-soft); color:var(--ink); border-color:var(--gold-soft);}
+  .btn-outline{background:transparent; color:#F3EFE4; border-color:rgba(243,239,228,.4);}
+  .btn-outline:hover{border-color:var(--gold-soft);}
+  .btn-solid:hover{background:var(--gold);}
+  .art{position:relative; width:100%; aspect-ratio:1/1;}
+  .art svg{width:100%; height:100%;}
+
+  .slide-nav{position:absolute; top:50%; transform:translateY(-50%); z-index:2; background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.25); color:#F3EFE4; width:42px; height:42px; border-radius:50%; cursor:pointer; font-size:1.1rem;}
+  .slide-nav:hover{background:rgba(255,255,255,.18);}
+  .slide-prev{left:20px;} .slide-next{right:20px;}
+  @media (max-width:780px){.slide-nav{display:none;}}
+  .dots{position:relative; z-index:2; display:flex; gap:9px; justify-content:center; padding-bottom:22px; margin-top:-10px;}
+  .dot{width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.3); border:none; cursor:pointer; padding:0;}
+  .dot.active{background:var(--gold-soft);}
+
+  .manifest{position:relative; z-index:1; border:1px solid rgba(243,239,228,.16); border-radius:var(--radius); padding:26px; background:rgba(255,255,255,.03); margin:0 auto 0; max-width:1100px;}
+  .manifest .wrap{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; padding:0;}
+  .manifest .row{font-size:.92rem; color:#D9D3C3;}
+  .manifest .row b{display:block; font-family:'Fraunces',serif; font-weight:600; color:var(--gold-soft); font-size:1.35rem; margin-bottom:2px;}
+  @media (max-width:700px){.manifest .wrap{grid-template-columns:1fr;}}
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:none;}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1; transform:none; transition:none;}}
+
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;}
+  .about-grid p{max-width:52ch;}
+  .stats{list-style:none; margin:30px 0 0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .stats li{border-left:2px solid var(--gold); padding-left:16px;}
+  .stats li b{display:block; font-family:'Fraunces',serif; font-size:1.7rem; color:var(--ink-2);}
+  .stats li span{font-size:.87rem; opacity:.75;}
+  @media (prefers-color-scheme:dark){.stats li b{color:var(--gold-soft);}}
+  :root[data-theme="dark"] .stats li b{color:var(--gold-soft);}
+
+  .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:48px;}
+  .service{background:var(--paper-2); border:1px solid var(--line); border-radius:10px; padding:32px 26px;
+    display:flex; flex-direction:column; gap:14px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;}
+  .service:hover{transform:translateY(-6px); box-shadow:0 18px 34px -20px rgba(18,40,36,.35); border-color:var(--gold);}
+  .icon-circle{width:52px; height:52px; border-radius:50%; background:var(--ink); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .icon-circle svg{width:24px; height:24px; stroke:var(--gold-soft); fill:none; stroke-width:1.5;}
+  .service h3{font-size:1.15rem;}
+  .service p{font-size:.91rem; margin:0; opacity:.82;}
+  @media (max-width:780px){.services-grid{grid-template-columns:1fr;}}
+  @media (min-width:781px) and (max-width:1000px){.services-grid{grid-template-columns:repeat(2,1fr);}}
+
+  /* PROCESS */
+  .process{display:grid; grid-template-columns:repeat(4,1fr); gap:28px; margin-top:48px; counter-reset:step;}
+  .step{position:relative; padding-top:18px; border-top:2px solid var(--line);}
+  .step .num{font-family:'Fraunces',serif; font-size:2.4rem; color:var(--gold); opacity:.55; display:block; line-height:1;}
+  .step h3{font-size:1.05rem; margin-top:10px;}
+  .step p{font-size:.9rem; opacity:.8; margin:8px 0 0;}
+  @media (max-width:900px){.process{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.process{grid-template-columns:1fr;}}
+
+  /* FEATURE TILES (alternating) */
+  .feature-row{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; padding:46px 0;}
+  .feature-row:not(:last-child){border-bottom:1px solid var(--line);}
+  .feature-row.rev .ftext{order:2;} .feature-row.rev .fgraphic{order:1;}
+  .fgraphic{aspect-ratio:4/3; border-radius:10px; background:var(--paper-2); border:1px solid var(--line); display:flex; align-items:center; justify-content:center;}
+  .fgraphic svg{width:46%; height:46%; stroke:var(--clay); fill:none; stroke-width:1.2;}
+  .ftext .eyebrow{margin-bottom:8px;}
+  .ftext p{margin-top:12px; max-width:48ch; opacity:.85;}
+  @media (max-width:780px){.feature-row, .feature-row.rev{grid-template-columns:1fr; gap:24px;} .feature-row.rev .ftext, .feature-row.rev .fgraphic{order:0;}}
+
+  .capability{background:var(--ink); color:#F3EFE4;}
+  .capability .eyebrow{color:var(--gold-soft);}
+  .strip{display:grid; grid-template-columns:repeat(4,1fr); gap:38px; margin-top:40px;}
+  .strip div{border-top:2px solid var(--gold); padding-top:16px;}
+  .strip h3{font-size:1.02rem; font-family:'Inter',sans-serif; font-weight:600; color:#FBF8EF;}
+  .strip p{font-size:.89rem; opacity:.75; margin:8px 0 0; color:#D9D3C3;}
+  @media (max-width:780px){.strip{grid-template-columns:1fr 1fr;}}
+
+  /* FAQ */
+  .faq{max-width:760px; margin-top:36px;}
+  .faq details{border-bottom:1px solid var(--line); padding:18px 0;}
+  .faq summary{cursor:pointer; font-family:'Fraunces',serif; font-size:1.08rem; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:"+"; font-size:1.3rem; color:var(--gold); flex-shrink:0;}
+  .faq details[open] summary::after{content:"–";}
+  .faq p{font-size:.94rem; opacity:.82; margin:12px 0 0; max-width:64ch;}
+
+  /* CTA BANNER */
+  .cta-banner{background:linear-gradient(120deg, var(--ink) 0%, var(--ink-2) 100%); color:#F3EFE4; text-align:left;}
+  .cta-banner .wrap{display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+  .cta-banner h2{color:#FBF8EF; font-size:1.9rem;}
+  .cta-banner p{color:#D9D3C3; margin-top:8px; max-width:44ch;}
+
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px;}
+  .field{margin-bottom:17px;}
+  .field label{display:block; font-size:.85rem; margin-bottom:6px; opacity:.75;}
+  .field input, .field textarea{width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:var(--radius);
+    background:var(--paper-2); color:var(--text); font-family:inherit; font-size:.95rem;}
+  .field input:focus, .field textarea:focus{outline:2px solid var(--gold); outline-offset:1px;}
+  .contact-info p{margin:0 0 9px; font-size:.96rem;}
+  .contact-info .note{margin-top:26px; padding:15px 17px; border:1px dashed var(--line); border-radius:var(--radius); font-size:.85rem; opacity:.8;}
+
+  /* FOOTER */
+  footer{background:var(--ink); color:#D9D3C3; padding:64px 0 0;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(243,239,228,.12);}
+  .footer-grid h4{font-family:'Inter',sans-serif; font-size:.86rem; font-weight:600; color:#FBF8EF; margin:0 0 16px; letter-spacing:.02em;}
+  .footer-brand .brand{color:#FBF8EF;}
+  .footer-brand p{font-size:.88rem; margin-top:14px; max-width:34ch; opacity:.8;}
+  .footer-grid ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+  .footer-grid ul a{font-size:.88rem; text-decoration:none; opacity:.85;}
+  .footer-grid ul a:hover{color:var(--gold-soft); opacity:1;}
+  .footer-grid p{font-size:.88rem; margin:0 0 8px;}
+  .footer-bottom{padding:22px 0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:.82rem; opacity:.6;}
+  @media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr; row-gap:32px;}}
+  @media (max-width:560px){.footer-grid{grid-template-columns:1fr;}}
+
+  @media (max-width:780px){
+    .slide-grid{grid-template-columns:1fr; padding:60px 0 40px;}
+    .about-grid{grid-template-columns:1fr; gap:34px;}
+    .contact-grid{grid-template-columns:1fr; gap:34px;}
+    section{padding:70px 0;}
+  }
+  :focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">BMC <em>Outsourcing</em></div>
+    <button class="navtoggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul class="navlinks" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#capability">Why Us</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="home" class="hero">
+  <div class="slides" id="slides">
+
+    <div class="slide slide-1 active" data-slide="0">
+      <div class="wrap slide-grid">
+        <div>
+          <p class="eyebrow" style="color:var(--gold-soft);">BMC Outsourcing Pvt Ltd</p>
+          <h1>One partner for sourcing, supply, <span class="accent">and everyday goods.</span></h1>
+          <p class="lead">We buy, sell, and move goods across furniture, agriculture produce, dry vegetables, and household essentials — plus the staffing support that keeps your operations running.</p>
+          <div class="cta-row">
+            <a href="#services" class="btn btn-solid">See what we do</a>
+            <a href="#contact" class="btn btn-outline">Get in touch</a>
+          </div>
+        </div>
+        <div class="art" aria-hidden="true">
+          <svg viewBox="0 0 320 320" fill="none">
+            <rect x="30" y="150" width="110" height="110" rx="4" stroke="#C9A253" stroke-width="1.4" opacity=".85"/>
+            <line x1="30" y1="180" x2="140" y2="180" stroke="#C9A253" stroke-width="1" opacity=".5"/>
+            <line x1="85" y1="150" x2="85" y2="260" stroke="#C9A253" stroke-width="1" opacity=".5"/>
+            <rect x="150" y="110" width="140" height="140" rx="4" stroke="#E4C77E" stroke-width="1.6"/>
+            <line x1="150" y1="150" x2="290" y2="150" stroke="#E4C77E" stroke-width="1" opacity=".6"/>
+            <line x1="205" y1="110" x2="205" y2="250" stroke="#E4C77E" stroke-width="1" opacity=".6"/>
+            <circle cx="255" cy="70" r="26" stroke="#C9A253" stroke-width="1.4" opacity=".7"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide slide-2" data-slide="1">
+      <div class="wrap slide-grid">
+        <div>
+          <p class="eyebrow" style="color:var(--gold-soft);">Furniture</p>
+          <h1>Furniture sourcing, from <span class="accent">workshop to warehouse.</span></h1>
+          <p class="lead">We source and supply furniture for homes, offices, and commercial fit-outs, matching quality and lead time to what the project needs.</p>
+          <div class="cta-row">
+            <a href="#services" class="btn btn-solid">View services</a>
+            <a href="#contact" class="btn btn-outline">Request a quote</a>
+          </div>
+        </div>
+        <div class="art" aria-hidden="true">
+          <svg viewBox="0 0 320 320" fill="none">
+            <path d="M50 200V120a9 9 0 019-9h30a9 9 0 019 9v40M50 200h180M50 200v50M230 200v50M50 160h180" stroke="#E4C77E" stroke-width="1.5"/>
+            <path d="M230 200V120a9 9 0 00-9-9h-30a9 9 0 00-9 9v40" stroke="#E4C77E" stroke-width="1.5"/>
+            <rect x="120" y="230" width="80" height="14" rx="3" stroke="#C9A253" stroke-width="1.3"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide slide-3" data-slide="2">
+      <div class="wrap slide-grid">
+        <div>
+          <p class="eyebrow" style="color:var(--gold-soft);">Agriculture &amp; Dry Vegetables</p>
+          <h1>From the field to the <span class="accent">buyer, with care.</span></h1>
+          <p class="lead">Agriculture produce and dried vegetable stock, sourced and supplied with the consistency that bulk buyers and processors need.</p>
+          <div class="cta-row">
+            <a href="#services" class="btn btn-solid">View services</a>
+            <a href="#contact" class="btn btn-outline">Talk to us</a>
+          </div>
+        </div>
+        <div class="art" aria-hidden="true">
+          <svg viewBox="0 0 320 320" fill="none">
+            <path d="M160 240c-20-40-20-90 0-130 20 40 20 90 0 130z" stroke="#8FBFA6" stroke-width="1.6"/>
+            <path d="M160 190c-30-10-55-35-60-70 35 5 60 30 70 60M160 190c30-10 55-35 60-70-35 5-60 30-70 60" stroke="#E4C77E" stroke-width="1.4"/>
+            <line x1="160" y1="190" x2="160" y2="260" stroke="#C9A253" stroke-width="1.6"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide slide-4" data-slide="3">
+      <div class="wrap slide-grid">
+        <div>
+          <p class="eyebrow" style="color:var(--gold-soft);">Retail &amp; Wholesale</p>
+          <h1>Everyday goods, at <span class="accent">retail or wholesale scale.</span></h1>
+          <p class="lead">Cosmetics, toilet articles, and other everyday essentials — supplied whether you need a single case or a full container.</p>
+          <div class="cta-row">
+            <a href="#services" class="btn btn-solid">View services</a>
+            <a href="#contact" class="btn btn-outline">Get a quote</a>
+          </div>
+        </div>
+        <div class="art" aria-hidden="true">
+          <svg viewBox="0 0 320 320" fill="none">
+            <rect x="90" y="90" width="55" height="90" rx="6" stroke="#E4C77E" stroke-width="1.5"/>
+            <rect x="160" y="70" width="55" height="110" rx="6" stroke="#C9A253" stroke-width="1.5"/>
+            <rect x="105" y="105" width="25" height="10" rx="2" stroke="#E4C77E" stroke-width="1.2"/>
+            <rect x="175" y="88" width="25" height="10" rx="2" stroke="#C9A253" stroke-width="1.2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <button class="slide-nav slide-prev" id="prevBtn" aria-label="Previous slide">‹</button>
+    <button class="slide-nav slide-next" id="nextBtn" aria-label="Next slide">›</button>
+  </div>
+  <div class="dots" id="dots">
+    <button class="dot active" data-i="0" aria-label="Slide 1"></button>
+    <button class="dot" data-i="1" aria-label="Slide 2"></button>
+    <button class="dot" data-i="2" aria-label="Slide 3"></button>
+    <button class="dot" data-i="3" aria-label="Slide 4"></button>
+  </div>
+  <div class="wrap" style="padding-bottom:60px;">
+    <div class="manifest">
+      <div class="wrap">
+        <div class="row"><b>6</b>Trade lines</div>
+        <div class="row"><b>Furniture · Agri · FMCG</b>Sectors covered</div>
+        <div class="row"><b>Sale, purchase &amp; support</b>Our model</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="wrap reveal">
+  <div class="about-grid">
+    <div>
+      <p class="eyebrow">About us</p>
+      <h2>A trading house built around what businesses actually need.</h2>
+    </div>
+    <div>
+      <p>BMC Outsourcing Pvt Ltd works across sale and purchase, furniture, agriculture products, and dry vegetables, alongside retail and wholesale of everyday goods and business support services. We work with manufacturers, retailers, and institutions who need a dependable partner on the sourcing or selling side of the table.</p>
+      <ul class="stats">
+        <li><b>Multi-sector</b><span>Furniture to FMCG under one roof</span></li>
+        <li><b>Both sides</b><span>We buy and we sell</span></li>
+        <li><b>Retail + wholesale</b><span>Volume or single order</span></li>
+        <li><b>Staffing too</b><span>Placement &amp; business support</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="wrap reveal">
+  <p class="eyebrow">What we do</p>
+  <h2>Six lines of business, one point of contact.</h2>
+  <div class="services-grid">
+    <div class="service">
+      <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"/></svg></div>
+      <h3>Sale &amp; Purchase</h3>
+      <p>Buying and selling across categories, brokered directly between the two sides of a deal.</p>
+    </div>
+    <div class="service">
+      <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M3 20V9l9-5 9 5v11M3 20h18M6 20v-6h5v6M14 20v-9h4v9"/></svg></div>
+      <h3>Furniture</h3>
+      <p>Sourcing and supply of furniture for homes, offices, and commercial fit-outs.</p>
+    </div>
+    <div class="service">
+      <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 3c-3 3-3 7-3 7s4 0 7-3c1-1 1-3 0-4-1-1-3-1-4 0zM9 10c-3 0-6 3-6 7 0 2 1 3 3 3s3-1 3-3M15 10c3 0 6 3 6 7 0 2-1 3-3 3s-3-1-3-3"/></svg></div>
+      <h3>Agriculture Products</h3>
+      <p>Sourcing and supply of farm produce, moved from grower to buyer with consistent quality.</p>
+    </div>
+    <div class="service">
+      <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M6 3h12l-1 6H7L6 3zM7 9l-1 12h12L17 9M9 13h6M9 17h6"/></svg></div>
+      <h3>Dry Vegetables</h3>
+      <p>Dried and dehydrated vegetable produce for bulk buyers and food processors.</p>
+    </div>
+    <div class="service">
+      <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M4 8h16v13H4zM4 8l2-5h12l2 5M9 12v5M15 12v5"/></svg></div>
+      <h3>Retail &amp; Wholesale</h3>
+      <p>Cosmetics and toilet articles, and other everyday goods, supplied at retail or wholesale scale.</p>
+    </div>
+    <div class="service">
+      <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M8 12a3 3 0 100-6 3 3 0 000 6zM17 12a3 3 0 100-6 3 3 0 000 6zM2 20c0-3 2.5-5 6-5s6 2 6 5M13 20c0-2.5 2-4.5 4.5-4.5S22 17.5 22 20"/></svg></div>
+      <h3>Business Support</h3>
+      <p>Placement and business support services that help partner operations run smoothly.</p>
+    </div>
+  </div>
+</section>
+
+<section id="process" class="wrap reveal">
+  <p class="eyebrow">How we work</p>
+  <h2>From enquiry to delivery, in four steps.</h2>
+  <div class="process">
+    <div class="step"><span class="num">01</span><h3>Enquiry</h3><p>Tell us what you're sourcing or selling, and the volumes involved.</p></div>
+    <div class="step"><span class="num">02</span><h3>Sourcing &amp; matching</h3><p>We line up the right supplier, buyer, or stock against your requirement.</p></div>
+    <div class="step"><span class="num">03</span><h3>Quality &amp; terms</h3><p>We confirm quality, pricing, and terms before anything moves.</p></div>
+    <div class="step"><span class="num">04</span><h3>Delivery</h3><p>Goods are moved and handed off, with support after delivery if needed.</p></div>
+  </div>
+</section>
+
+<section class="wrap reveal">
+  <p class="eyebrow">A closer look</p>
+  <h2 style="margin-bottom:8px;">Where we spend most of our time.</h2>
+  <div class="feature-rows">
+    <div class="feature-row">
+      <div class="ftext">
+        <p class="eyebrow">Furniture</p>
+        <h3 style="font-size:1.4rem;">Furniture that fits the brief, not just the catalogue.</h3>
+        <p>From office fit-outs to residential orders, we source furniture to the specification and budget you set, and manage supply through to delivery.</p>
+      </div>
+      <div class="fgraphic"><svg viewBox="0 0 24 24"><path d="M3 20V9l9-5 9 5v11M3 20h18M6 20v-6h5v6M14 20v-9h4v9"/></svg></div>
+    </div>
+    <div class="feature-row rev">
+      <div class="ftext">
+        <p class="eyebrow">Agriculture Products &amp; Dry Vegetables</p>
+        <h3 style="font-size:1.4rem;">Farm produce and dried stock, handled consistently.</h3>
+        <p>We supply fresh agriculture produce and dried vegetable stock to bulk buyers, wholesalers, and processors, with quality checked before it ships.</p>
+      </div>
+      <div class="fgraphic"><svg viewBox="0 0 24 24"><path d="M12 3c-3 3-3 7-3 7s4 0 7-3c1-1 1-3 0-4-1-1-3-1-4 0zM9 10c-3 0-6 3-6 7 0 2 1 3 3 3s3-1 3-3M15 10c3 0 6 3 6 7 0 2-1 3-3 3s-3-1-3-3"/></svg></div>
+      </div>
+    <div class="feature-row">
+      <div class="ftext">
+        <p class="eyebrow">Retail &amp; Wholesale</p>
+        <h3 style="font-size:1.4rem;">Everyday goods, sized to your order.</h3>
+        <p>Cosmetics, toilet articles, and other household essentials, supplied whether you're stocking one shop or a chain of them.</p>
+      </div>
+      <div class="fgraphic"><svg viewBox="0 0 24 24"><path d="M4 8h16v13H4zM4 8l2-5h12l2 5M9 12v5M15 12v5"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<section id="capability" class="capability">
+  <div class="wrap reveal">
+    <p class="eyebrow">Why work with us</p>
+    <h2 style="color:#FBF8EF; margin-bottom:8px;">Built for buyers and sellers who need it done right.</h2>
+    <div class="strip">
+      <div><h3>Cross-sector reach</h3><p>Furniture, agriculture, and FMCG under a single trading relationship.</p></div>
+      <div><h3>Two-way trade</h3><p>We work both the buy side and the sell side of a transaction.</p></div>
+      <div><h3>Retail or bulk</h3><p>Order sizes from single-outlet retail up to wholesale volume.</p></div>
+      <div><h3>Beyond goods</h3><p>Placement and business support when your team needs the extra hands.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="wrap reveal">
+  <p class="eyebrow">Questions</p>
+  <h2>Frequently asked questions</h2>
+  <div class="faq">
+    <details open>
+      <summary>What sectors does BMC Outsourcing work in?</summary>
+      <p>We work across furniture, agriculture products, dry vegetables, and retail &amp; wholesale of everyday goods such as cosmetics and toilet articles, alongside business support and placement services.</p>
+    </details>
+    <details>
+      <summary>Do you handle both buying and selling?</summary>
+      <p>Yes. We work both sides of a transaction — sourcing goods for buyers, and finding buyers for suppliers, across all our trade lines.</p>
+    </details>
+    <details>
+      <summary>Can you supply at retail quantities, not just wholesale?</summary>
+      <p>Yes. Order sizes range from single-outlet retail quantities up to full wholesale volume, depending on what you need.</p>
+    </details>
+    <details>
+      <summary>What is included in business support services?</summary>
+      <p>This covers placement and general business support that helps partner operations run smoothly alongside our trading relationship.</p>
+    </details>
+    <details>
+      <summary>How do I get a quote?</summary>
+      <p>Use the enquiry form below, or reach out directly using the contact details on this page, and we'll follow up with next steps.</p>
+    </details>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="wrap">
+    <div>
+      <h2>Ready to source, sell, or staff up?</h2>
+      <p>Tell us what you need — we'll get back to you with next steps.</p>
+    </div>
+    <a href="#contact" class="btn btn-solid">Start an enquiry</a>
+  </div>
+</section>
+
+<section id="contact" class="wrap reveal">
+  <div class="contact-grid">
+    <div>
+      <p class="eyebrow">Get in touch</p>
+      <h2>Tell us what you're sourcing, or what you're selling.</h2>
+      <form id="contactForm">
+        <div class="field"><label for="name">Name</label><input id="name" name="name" required></div>
+        <div class="field"><label for="company">Company</label><input id="company" name="company"></div>
+        <div class="field"><label for="msg">What do you need?</label><textarea id="msg" name="message" rows="4" required></textarea></div>
+        <button class="btn btn-solid" id="submitBtn" type="submit">Send enquiry</button>
+        <p class="confirm" id="formConfirm" style="display:none; margin-top:14px; font-size:.9rem; color:var(--clay);"></p>
+      </form>
+    </div>
+    <div class="contact-info">
+      <p class="eyebrow">Contact details</p>
+      <p><strong>BMC Outsourcing Pvt Ltd</strong></p>
+      <p>Email: [email protected]</p>
+      <p>Phone: +91 00000 00000</p>
+      <p>Address: Add your registered office address here</p>
+      <div class="note">Placeholder contact details — replace with your real email, phone, and address before sharing this page.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <div class="brand">BMC <em>Outsourcing</em></div>
+      <p>A trading house across furniture, agriculture, dry vegetables, and everyday retail &amp; wholesale goods, with business support services on the side.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Our Services</h4>
+      <ul>
+        <li><a href="#services">Sale &amp; Purchase</a></li>
+        <li><a href="#services">Furniture</a></li>
+        <li><a href="#services">Agriculture Products</a></li>
+        <li><a href="#services">Dry Vegetables</a></li>
+        <li><a href="#services">Retail &amp; Wholesale</a></li>
+        <li><a href="#services">Business Support</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>[email protected]</p>
+      <p>+91 00000 00000</p>
+      <p>Registered office address here</p>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 BMC Outsourcing Pvt Ltd. All rights reserved.</span>
+    <span>Sale &amp; Purchase · Furniture · Agriculture · Dry Vegetables · Retail &amp; Wholesale · Business Support</span>
+  </div>
+</footer>
+
+<script>
+  var t=document.getElementById('navToggle'), l=document.getElementById('navLinks');
+  t.addEventListener('click', function(){ var open=l.classList.toggle('open'); t.setAttribute('aria-expanded', open); });
+  l.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ l.classList.remove('open'); t.setAttribute('aria-expanded','false'); }); });
+
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+    }, {threshold:.15});
+    document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+
+  (function(){
+    var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var dots=Array.prototype.slice.call(document.querySelectorAll('.dot'));
+    var idx=0, timer;
+    function show(i){
+      slides[idx].classList.remove('active'); dots[idx].classList.remove('active');
+      idx=(i+slides.length)%slides.length;
+      slides[idx].classList.add('active'); dots[idx].classList.add('active');
+    }
+    function next(){ show(idx+1); }
+    function start(){ timer=setInterval(next, 6000); }
+    function stop(){ clearInterval(timer); }
+    document.getElementById('nextBtn').addEventListener('click', function(){ stop(); next(); start(); });
+    document.getElementById('prevBtn').addEventListener('click', function(){ stop(); show(idx-1); start(); });
+    dots.forEach(function(d){ d.addEventListener('click', function(){ stop(); show(+d.dataset.i); start(); }); });
+    var hero=document.getElementById('slides');
+    hero.addEventListener('mouseenter', stop); hero.addEventListener('mouseleave', start);
+    start();
+  })();
+
+  // =========================
+  // EMAILJS CONTACT FORM
+  // Replace the 3 values below with your EmailJS details.
+  // =========================
+  emailjs.init({
+    publicKey: "YOUR_PUBLIC_KEY"
+  });
+
+  document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    var form = this;
+    var button = document.getElementById("submitBtn");
+    var confirm = document.getElementById("formConfirm");
+
+    button.disabled = true;
+    button.textContent = "Sending...";
+    confirm.style.display = "none";
+
+    emailjs.sendForm(
+      "YOUR_SERVICE_ID",
+      "YOUR_TEMPLATE_ID",
+      form
+    ).then(function() {
+      confirm.textContent = "Thanks — your enquiry has been sent successfully. We'll follow up shortly.";
+      confirm.style.display = "block";
+      form.reset();
+      button.disabled = false;
+      button.textContent = "Send enquiry";
+    }).catch(function(error) {
+      console.error("EmailJS error:", error);
+      confirm.textContent = "Sorry, something went wrong. Please try again or contact us directly.";
+      confirm.style.display = "block";
+      button.disabled = false;
+      button.textContent = "Send enquiry";
+    });
+  });
+  
+</script>
+</body>
+</html>
