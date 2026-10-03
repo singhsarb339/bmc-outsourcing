@@ -88,8 +88,10 @@
   .reveal.in{opacity:1; transform:none;}
   @media (prefers-reduced-motion:reduce){.reveal{opacity:1; transform:none; transition:none;}}
 
-  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;}
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start;}
   .about-grid p{max-width:52ch;}
+  .about-visual{margin-top:12px; border-radius:16px; overflow:hidden; border:1px solid var(--line); background:var(--paper-2); box-shadow:0 24px 48px -34px rgba(18,40,36,0.35); max-width:100%;}
+  .about-visual img{display:block; width:100%; height:300px; object-fit:cover;}
   .stats{list-style:none; margin:30px 0 0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:24px;}
   .stats li{border-left:2px solid var(--gold); padding-left:16px;}
   .stats li b{display:block; font-family:'Fraunces',serif; font-size:1.7rem; color:var(--ink-2);}
@@ -121,7 +123,8 @@
   .feature-row{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; padding:46px 0;}
   .feature-row:not(:last-child){border-bottom:1px solid var(--line);}
   .feature-row.rev .ftext{order:2;} .feature-row.rev .fgraphic{order:1;}
-  .fgraphic{aspect-ratio:4/3; border-radius:10px; background:var(--paper-2); border:1px solid var(--line); display:flex; align-items:center; justify-content:center;}
+  .fgraphic{aspect-ratio:4/3; border-radius:10px; background:var(--paper-2); border:1px solid var(--line); overflow:hidden; position:relative;}
+  .fgraphic img{width:100%; height:100%; object-fit:cover; display:block;}
   .fgraphic svg{width:46%; height:46%; stroke:var(--clay); fill:none; stroke-width:1.2;}
   .ftext .eyebrow{margin-bottom:8px;}
   .ftext p{margin-top:12px; max-width:48ch; opacity:.85;}
@@ -324,6 +327,9 @@
     <div>
       <p class="eyebrow">About us</p>
       <h2>A trading house built around what businesses actually need.</h2>
+      <div class="about-visual">
+        <img src="https://images.openai.com/static-rsc-4/5bqLgzwAOhPeSbE16BnwjIPveFWXUlAdJKwYfTcwab1KTp8j5fE3OIKel-e4vRyZRY1ErZyrFdcM_rkXHMmrIvvCH47H4qkn2iU0FdkzkYwV-dBx2XdiyY4rF1OHb5Zkd5-hqvFzR11dIFQHsZqDODLFVkSsa9fVSvSh6id9NEP2dSNA_dwEzFhfdo9CYayV?purpose=fullsize" alt="Business team collaboration" loading="lazy">
+      </div>
     </div>
     <div>
       <p>BMC Outsourcing Pvt Ltd works across sale and purchase, furniture, agriculture products, and dry vegetables, alongside retail and wholesale of everyday goods and business support services. We work with manufacturers, retailers, and institutions who need a dependable partner on the sourcing or selling side of the table.</p>
@@ -395,7 +401,9 @@
         <h3 style="font-size:1.4rem;">Furniture that fits the brief, not just the catalogue.</h3>
         <p>From office fit-outs to residential orders, we source furniture to the specification and budget you set, and manage supply through to delivery.</p>
       </div>
-      <div class="fgraphic"><svg viewBox="0 0 24 24"><path d="M3 20V9l9-5 9 5v11M3 20h18M6 20v-6h5v6M14 20v-9h4v9"/></svg></div>
+      <div class="fgraphic">
+        <img src="https://www.dial4trade.com/uploaded_files/helpimgs/help_7092d0c.jpg">
+      </div>
     </div>
     <div class="feature-row rev">
       <div class="ftext">
@@ -403,15 +411,19 @@
         <h3 style="font-size:1.4rem;">Farm produce and dried stock, handled consistently.</h3>
         <p>We supply fresh agriculture produce and dried vegetable stock to bulk buyers, wholesalers, and processors, with quality checked before it ships.</p>
       </div>
-      <div class="fgraphic"><svg viewBox="0 0 24 24"><path d="M12 3c-3 3-3 7-3 7s4 0 7-3c1-1 1-3 0-4-1-1-3-1-4 0zM9 10c-3 0-6 3-6 7 0 2 1 3 3 3s3-1 3-3M15 10c3 0 6 3 6 7 0 2-1 3-3 3s-3-1-3-3"/></svg></div>
+      <div class="fgraphic">
+        <img src="https://agtech.folio3.com/wp-content/uploads/2026/03/10-most-profitable-crops-for-small-farms-featured.png" alt="Agriculture produce" loading="lazy">
       </div>
+    </div>
     <div class="feature-row">
       <div class="ftext">
         <p class="eyebrow">Retail &amp; Wholesale</p>
         <h3 style="font-size:1.4rem;">Everyday goods, sized to your order.</h3>
         <p>Cosmetics, toilet articles, and other household essentials, supplied whether you're stocking one shop or a chain of them.</p>
       </div>
-      <div class="fgraphic"><svg viewBox="0 0 24 24"><path d="M4 8h16v13H4zM4 8l2-5h12l2 5M9 12v5M15 12v5"/></svg></div>
+      <div class="fgraphic">
+        <img src="https://img.magnific.com/free-photo/person-setting-up-online-store-uploading-products-laptop_73899-54387.jpg?semt=ais_hybrid&w=740&q=80" alt="Retail and wholesale goods" loading="lazy">
+      </div>
     </div>
   </div>
 </section>
@@ -473,8 +485,9 @@
       <h2>Tell us what you're sourcing, or what you're selling.</h2>
       <form id="contactForm">
         <div class="field"><label for="name">Name</label><input id="name" name="name" required></div>
-        <div class="field"><label for="company">Company</label><input id="company" name="company"></div>
-        <div class="field"><label for="msg">What do you need?</label><textarea id="msg" name="message" rows="4" required></textarea></div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" ></div>
+        <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required></div>
+        <div class="field"><label for="msg">Message</label><textarea id="msg" name="message" rows="4" ></textarea></div>
         <button class="btn btn-solid" id="submitBtn" type="submit">Send enquiry</button>
         <p class="confirm" id="formConfirm" style="display:none; margin-top:14px; font-size:.9rem; color:var(--clay);"></p>
       </form>
@@ -482,10 +495,10 @@
     <div class="contact-info">
       <p class="eyebrow">Contact details</p>
       <p><strong>BMC Outsourcing Pvt Ltd</strong></p>
-      <p>Email: [email protected]</p>
-      <p>Phone: +91 00000 00000</p>
-      <p>Address: Add your registered office address here</p>
-      <div class="note">Placeholder contact details — replace with your real email, phone, and address before sharing this page.</div>
+      <p>Email: info@bmcoutsourcing.com</p>
+      <p>Phone: +91 9999999999</p>
+      <p>Address: Amritsar,Punjab</p>
+     <!-- // <div class="note"></div> -->
     </div>
   </div>
 </section>
@@ -519,9 +532,10 @@
     </div>
     <div>
       <h4>Contact</h4>
-      <p>[email protected]</p>
-      <p>+91 00000 00000</p>
-      <p>Registered office address here</p>
+      <p>info@bmcoutsourcing.com</p>
+      <p>+91 9999999999</p>
+      <p>Amritsar, Punjab
+      </p>
     </div>
   </div>
   <div class="wrap footer-bottom">
@@ -566,11 +580,17 @@
 
   // =========================
   // EMAILJS CONTACT FORM
-  // Replace the 3 values below with your EmailJS details.
+  // Replace the public key below with your real EmailJS account key.
   // =========================
-  emailjs.init({
-    publicKey: "YOUR_PUBLIC_KEY"
-  });
+  var emailConfig = {
+    publicKey: "CVNBMJ4GWjo8Wcpwu",
+    serviceId: "service_4qm3c5f",
+    templateId: "template_uy28lra"
+  };
+
+  if (emailConfig.publicKey && emailConfig.publicKey !== "YOUR_PUBLIC_KEY") {
+    emailjs.init({ publicKey: emailConfig.publicKey });
+  }
 
   document.getElementById("contactForm").addEventListener("submit", function(e) {
     e.preventDefault();
@@ -579,13 +599,19 @@
     var button = document.getElementById("submitBtn");
     var confirm = document.getElementById("formConfirm");
 
+    if (!emailConfig.publicKey || emailConfig.publicKey === "YOUR_PUBLIC_KEY") {
+      confirm.textContent = "Email service is not configured yet. Please add your EmailJS public key in the code before sending the form.";
+      confirm.style.display = "block";
+      return;
+    }
+
     button.disabled = true;
     button.textContent = "Sending...";
     confirm.style.display = "none";
 
     emailjs.sendForm(
-      "YOUR_SERVICE_ID",
-      "YOUR_TEMPLATE_ID",
+      emailConfig.serviceId,
+      emailConfig.templateId,
       form
     ).then(function() {
       confirm.textContent = "Thanks — your enquiry has been sent successfully. We'll follow up shortly.";
@@ -595,7 +621,7 @@
       button.textContent = "Send enquiry";
     }).catch(function(error) {
       console.error("EmailJS error:", error);
-      confirm.textContent = "Sorry, something went wrong. Please try again or contact us directly.";
+      confirm.textContent = "Email service is not configured correctly. Please update your EmailJS public key, service ID, and template ID.";
       confirm.style.display = "block";
       button.disabled = false;
       button.textContent = "Send enquiry";
